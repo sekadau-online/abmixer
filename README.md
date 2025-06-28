@@ -6,7 +6,6 @@
 Sistem rekomendasi nutrisi tanaman yang dirancang khusus untuk kondisi iklim khatulistiwa dengan suhu tinggi (>30°C). Proyek ini membantu petani menghindari overdosis nutrisi akibat penguapan tinggi dan stres panas.
 
 ![Preview Aplikasi](screenshot.png)
-![{BC6D40B9-BA37-4B6A-A1DC-6BD37D67469C}](https://github.com/user-attachments/assets/f18ab457-f2e7-491e-9b9a-29fcb906fff7)
 ![{18605852-F602-42DB-9CEE-6CC0A95D6B86}](https://github.com/user-attachments/assets/dc8359f9-93da-4206-bbc4-df6c24ad2a22)
 
 ## 🌡️ Masalah Utama: Overdosis Nutrisi Akibat Suhu Tinggi
