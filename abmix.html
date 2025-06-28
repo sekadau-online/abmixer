@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Pupuk AB Mix - Preset PPM Ideal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #e6f7e6, #d1ebff);
+      color: #333;
+      line-height: 1.6;
+      padding: 15px;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    
+    header {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(to right, #2c6e3c, #3d8b55);
+      color: white;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+      transform: rotate(30deg);
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e0f0e7;
+    }
+    
+    .section-icon {
+      background: linear-gradient(to bottom, #2c6e3c, #245530);
+      color: white;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    }
+    
+    h2 {
+      color: #2c6e3c;
+      font-size: 1.5rem;
+    }
+    
+    h3 {
+      color: #3d8b55;
+      font-size: 1.3rem;
+      margin: 20px 0 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #d1e7dd;
+    }
+    
+    .water-input-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: linear-gradient(to right, #e6f7ff, #d1ebff);
+      padding: 15px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+    
+    .water-input-container label {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2c6e3c;
+    }
+    
+    .water-input {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .water-input input {
+      flex: 1;
+      padding: 14px;
+      border: 2px solid #4a8da8;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      background: white;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .preset-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .preset-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .preset-group label {
+      font-weight: 600;
+      color: #2c6e3c;
+    }
+    
+    .preset-group select {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 2px solid #c2e0d0;
+      font-size: 16px;
+      background: white;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232c6e3c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 16px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      font-size: 0.9rem;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+    
+    th, td {
+      padding: 12px 10px;
+      text-align: center;
+      border: 1px solid #d1e7dd;
+    }
+    
+    th {
+      background: linear-gradient(to bottom, #2c6e3c, #245530);
+      color: white;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f8fcf9;
+    }
+    
+    input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #c2e0d0;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      background: white;
+      transition: all 0.3s;
+    }
+    
+    input[type="number"]:focus {
+      border-color: #2c6e3c;
+      box-shadow: 0 0 0 3px rgba(44, 110, 60, 0.2);
+      outline: none;
+      transform: scale(1.03);
+    }
+    
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    
+    button {
+      background: linear-gradient(to bottom, #2c6e3c, #245530);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.3s;
+      flex: 1;
+      min-width: 200px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    
+    button:active {
+      transform: translateY(1px);
+    }
+    
+    button.secondary {
+      background: linear-gradient(to bottom, #4a8da8, #3f7a91);
+    }
+    
+    button.tertiary {
+      background: linear-gradient(to bottom, #d35400, #e67e22);
+    }
+    
+    .result-box {
+      background: linear-gradient(to right, #f0f9eb, #e6f7e6);
+      border-left: 5px solid #2c6e3c;
+      padding: 20px;
+      border-radius: 0 15px 15px 0;
+      margin: 25px 0;
+    }
+    
+    .ec-guide {
+      background: linear-gradient(to right, #e6f7ff, #d1ebff);
+      border-left: 5px solid #4a8da8;
+      padding: 20px;
+      border-radius: 0 15px 15px 0;
+      margin: 25px 0;
+    }
+    
+    .nutrient-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .nutrient-card {
+      background: white;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      border-top: 5px solid #2c6e3c;
+      transition: all 0.3s;
+    }
+    
+    .nutrient-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    
+    .nutrient-value {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2c6e3c;
+      margin: 10px 0;
+    }
+    
+    .nutrient-name {
+      font-size: 1.1rem;
+      color: #3d8b55;
+      font-weight: 600;
+    }
+    
+    .ec-status-card {
+      background: white;
+      border-radius: 12px;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 5px solid #4a8da8;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    
+    .ec-value {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      margin: 10px 0;
+      color: #2c6e3c;
+    }
+    
+    .ec-ideal {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #3d8b55;
+      font-weight: 600;
+    }
+    
+    .ec-status {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 15px 0;
+    }
+    
+    .ec-good {
+      background-color: #e6f7e6;
+      color: #2c6e3c;
+    }
+    
+    .ec-low {
+      background-color: #e6f7ff;
+      color: #4a8da8;
+    }
+    
+    .ec-high {
+      background-color: #fce8e8;
+      color: #c94c4c;
+    }
+    
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      color: #6c757d;
+      font-size: 14px;
+      border-top: 1px solid #e0f0e7;
+    }
+    
+    .volume-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #f8fcf9;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 15px 0;
+      border: 1px solid #d1e7dd;
+    }
+    
+    .volume-info .value {
+      font-weight: bold;
+      color: #2c6e3c;
+      font-size: 1.2rem;
+    }
+    
+    .preset-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .preset-option i {
+      font-size: 1.2rem;
+    }
+    
+    .file-input-wrapper {
+      position: relative;
+      display: inline-block;
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .file-input-wrapper input[type="file"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+    
+    .json-container {
+      margin-top: 20px;
+      background: #f8f8f8;
+      border-radius: 10px;
+      padding: 15px;
+    }
+    
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 15px;
+      border: 2px solid #d1e7dd;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 14px;
+      resize: vertical;
+      background: white;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.06);
+    }
+    
+    @media (min-width: 768px) {
+      .preset-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      
+      .button-group {
+        gap: 15px;
+      }
+      
+      button {
+        flex: 1;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .button-group {
+        flex-direction: column;
+      }
+      
+      button {
+        width: 100%;
+      }
+    }
+    
+    .expert-note {
+      background: #fff8e1;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      border-radius: 0 8px 8px 0;
+      margin: 15px 0;
+      font-size: 0.95rem;
+    }
+    
+    .expert-note h4 {
+      color: #d35400;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .preset-description {
+      background: #e8f5e9;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 0.95rem;
+      border-left: 4px solid #2c6e3c;
+    }
+    
+    .ppm-recommendation {
+      background: #e3f2fd;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 4px solid #1976d2;
+    }
+    
+    .ppm-recommendation h4 {
+      color: #0d47a1;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .ppm-table {
+      width: 100%;
+      margin: 15px 0;
+    }
+    
+    .ppm-table th {
+      background: linear-gradient(to bottom, #1976d2, #0d47a1);
+    }
+    
+    .nutrient-status {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 15px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    
+    .status-ideal {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+    
+    .status-low {
+      background-color: #ffecb3;
+      color: #f57f17;
+    }
+    
+    .status-high {
+      background-color: #ffcdd2;
+      color: #c62828;
+    }
+    
+    .phase-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-right: 8px;
+      font-size: 0.9rem;
+    }
+    
+    .badge-semai {
+      background-color: #81c784;
+      color: white;
+    }
+    
+    .badge-vegetatif {
+      background-color: #4fc3f7;
+      color: white;
+    }
+    
+    .badge-generatif {
+      background-color: #ba68c8;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><i class="fas fa-calculator"></i> Kalkulator Pupuk AB Mix</h1>
+      <p>Preset PPM Ideal Berdasarkan Fase Pertumbuhan</p>
+    </header>
+    
+    <div class="card">
+      <div class="section-title">
+        <div class="section-icon"><i class="fas fa-tint"></i></div>
+        <h2>Pengaturan Dasar</h2>
+      </div>
+      
+      <div class="water-input-container">
+        <label>Volume Air yang Digunakan (Liter):</label>
+        <div class="water-input">
+          <input type="number" id="volumeAir" value="1" min="0.1" step="0.1" inputmode="decimal" />
+        </div>
+      </div>
+      
+      <div class="preset-container">
+        <div class="preset-group">
+          <label for="faseTanaman">Pilih Fase Tanaman:</label>
+          <select id="faseTanaman">
+            <option value="semai">🌱 1. Semai</option>
+            <option value="vegetatif_akar">🌿 2. Vegetatif Akar</option>
+            <option value="vegetatif_batang_daun">🌿 3. Vegetatif Batang & Daun</option>
+            <option value="generatif_bunga">🌸 4. Generatif Bunga</option>
+            <option value="generatif_pembentukan_buah">🍅 5. Generatif Pembentukan Buah</option>
+            <option value="generatif_pembesaran_buah">🍅 6. Generatif Pembesaran Buah</option>
+            <option value="generatif_rasa_buah">🍯 7. Generatif Rasa Buah</option>
+          </select>
+        </div>
+        
+        <div class="preset-group">
+          <label for="presetPupuk">Preset Formula Pakar:</label>
+          <select id="presetPupuk">
+            <option value="custom">-- Pilih Preset Pakar --</option>
+            <optgroup label="Formula Umum">
+              <option value="semai">🌱 1. Semai</option>
+              <option value="vegetatif_akar">🌿 2. Vegetatif Akar</option>
+              <option value="vegetatif_batang_daun">🌿 3. Vegetatif Batang & Daun</option>
+              <option value="generatif_bunga">🌸 4. Generatif Bunga</option>
+              <option value="generatif_pembentukan_buah">🍅 5. Pembentukan Buah</option>
+              <option value="generatif_pembesaran_buah">🍅 6. Pembesaran Buah</option>
+              <option value="generatif_rasa_buah">🍯 7. Rasa Buah</option>
+            </optgroup>
+            <optgroup label="Tanaman Buah (Melon)">
+              <option value="melon_semai">🍈 Melon - Semai</option>
+              <option value="melon_vegetatif_akar">🍈 Melon - Vegetatif Akar</option>
+              <option value="melon_vegetatif_batang_daun">🍈 Melon - Vegetatif Batang & Daun</option>
+              <option value="melon_generatif_bunga">🍈 Melon - Generatif Bunga</option>
+              <option value="melon_generatif_pembentukan">🍈 Melon - Pembentukan Buah</option>
+              <option value="melon_generatif_pembesaran">🍈 Melon - Pembesaran Buah</option>
+              <option value="melon_generatif_manis">🍈 Melon - Rasa Manis</option>
+            </optgroup>
+            <optgroup label="Sayuran Hijau">
+              <option value="sayuran_semai">🥬 Sayuran - Semai</option>
+              <option value="sayuran_vegetatif_akar">🥬 Sayuran - Vegetatif Akar</option>
+              <option value="sayuran_vegetatif_batang_daun">🥬 Sayuran - Vegetatif Batang & Daun</option>
+            </optgroup>
+            <!-- Tambahkan optgroup untuk preset custom -->
+            <optgroup label="Custom" id="customPresetGroup">
+              <!-- Preset custom akan ditambahkan di sini secara otomatis -->
+            </optgroup>
+          </select>
+        </div>
+      </div>
+      
+      <div class="expert-note">
+        <h4><i class="fas fa-lightbulb"></i> Rekomendasi PPM Ideal per Fase:</h4>
+        <table class="ppm-table">
+          <thead>
+            <tr>
+              <th>Fase</th>
+              <th>N (ppm)</th>
+              <th>P₂O₅ (ppm)</th>
+              <th>K₂O (ppm)</th>
+              <th>EC (mS/cm)</th>
+              <th>Catatan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>🌱 1. Semai</td>
+              <td>40-80</td>
+              <td>20-40</td>
+              <td>40-60</td>
+              <td>0.4-0.8</td>
+              <td>Larutan ringan, akar awal</td>
+            </tr>
+            <tr>
+              <td>🌿 2. Vegetatif Akar</td>
+              <td>80-120</td>
+              <td>40-60</td>
+              <td>80-100</td>
+              <td>0.8-1.2</td>
+              <td>Pertumbuhan akar & tunas</td>
+            </tr>
+            <tr>
+              <td>🌿 3. Vegetatif Batang & Daun</td>
+              <td>120-200</td>
+              <td>30-50</td>
+              <td>150-200</td>
+              <td>1.2-1.8</td>
+              <td>Fokus N dan K untuk massa hijau</td>
+            </tr>
+            <tr>
+              <td>🌸 4. Generatif Bunga</td>
+              <td>80-140</td>
+              <td>80-120</td>
+              <td>200-250</td>
+              <td>1.8-2.2</td>
+              <td>P tinggi → bunga kuat</td>
+            </tr>
+            <tr>
+              <td>🍅 5. Pembentukan Buah</td>
+              <td>60-120</td>
+              <td>70-100</td>
+              <td>250-350</td>
+              <td>2.0-2.5</td>
+              <td>P dan K dominan</td>
+            </tr>
+            <tr>
+              <td>🍅 6. Pembesaran Buah</td>
+              <td>40-80</td>
+              <td>40-60</td>
+              <td>300-400</td>
+              <td>2.2-2.8</td>
+              <td>N rendah, K tinggi</td>
+            </tr>
+            <tr>
+              <td>🍯 7. Rasa Buah</td>
+              <td>20-50</td>
+              <td>30-50</td>
+              <td>350-500</td>
+              <td>2.0-2.5</td>
+              <td>N minimal, K tinggi → rasa manis</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="volume-info">
+        <p>Volume air saat ini: <span class="value">1 Liter</span></p>
+        <p>Perhitungan nutrisi akan disesuaikan berdasarkan volume air ini</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="section-title">
+        <div class="section-icon"><i class="fas fa-flask"></i></div>
+        <h2>Komposisi Pupuk</h2>
+      </div>
+      
+      <h3><span class="section-icon">A</span> Bagian A</h3>
+      <div style="overflow-x: auto;">
+        <table id="tableA">
+          <thead>
+            <tr>
+              <th>Bahan</th>
+              <th>N %</th>
+              <th>P₂O₅ %</th>
+              <th>K₂O %</th>
+              <th>S %</th>
+              <th>MgO %</th>
+              <th>CaO %</th>
+              <th>Jumlah (g)</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyA">
+            <!-- Baris akan diisi oleh JavaScript -->
+          </tbody>
+        </table>
+      </div>
+      
+      <h3><span class="section-icon">B</span> Bagian B</h3>
+      <div style="overflow-x: auto;">
+        <table id="tableB">
+          <thead>
+            <tr>
+              <th>Bahan</th>
+              <th>N %</th>
+              <th>P₂O₅ %</th>
+              <th>K₂O %</th>
+              <th>S %</th>
+              <th>MgO %</th>
+              <th>CaO %</th>
+              <th>Jumlah (g)</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyB">
+            <!-- Baris akan diisi oleh JavaScript -->
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="button-group">
+        <button onclick="hitung()"><i class="fas fa-calculator"></i> Hitung Kandungan</button>
+        <button onclick="resetForm()" class="secondary"><i class="fas fa-redo"></i> Reset Form</button>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="section-title">
+        <div class="section-icon"><i class="fas fa-chart-bar"></i></div>
+        <h2>Hasil Perhitungan</h2>
+      </div>
+      
+      <div id="hasil">
+        <div class="result-box">
+          <h3><i class="fas fa-tint"></i> Hasil Perhitungan untuk 1 Liter Air</h3>
+          
+          <div class="volume-info">
+            <p><i class="fas fa-weight-hanging"></i> Total pupuk yang digunakan: <span class="value">0 gram</span></p>
+            <p><i class="fas fa-flask"></i> Konsentrasi: <span class="value">0 g/L</span></p>
+          </div>
+          
+          <div class="nutrient-summary">
+            <div class="nutrient-card">
+              <div class="nutrient-name"><i class="fas fa-leaf"></i> Nitrogen (N)</div>
+              <div class="nutrient-value">0 ppm</div>
+              <div>0.00 g</div>
+              <div><small>Pertumbuhan vegetatif</small></div>
+            </div>
+            
+            <div class="nutrient-card">
+              <div class="nutrient-name"><i class="fas fa-root"></i> Fosfor (P₂O₅)</div>
+              <div class="nutrient-value">0 ppm</div>
+              <div>0.00 g</div>
+              <div><small>Perkembangan akar & bunga</small></div>
+            </div>
+            
+            <div class="nutrient-card">
+              <div class="nutrient-name"><i class="fas fa-apple-alt"></i> Kalium (K₂O)</div>
+              <div class="nutrient-value">0 ppm</div>
+              <div>0.00 g</div>
+              <div><small>Pembungaan & ketahanan</small></div>
+            </div>
+            
+            <div class="nutrient-card">
+              <div class="nutrient-name"><i class="fas fa-seedling"></i> Total Nutrisi</div>
+              <div class="nutrient-value">0 g</div>
+              <div>dalam 1 L air</div>
+            </div>
+          </div>
+          
+          <h3><i class="fas fa-bolt"></i> Electrical Conductivity (EC)</h3>
+          <div class="ec-status-card">
+            <div class="ec-value">0.00 mS/cm</div>
+            <div class="ec-ideal">EC Ideal: -</div>
+            <div class="ec-status ec-good">Status: Masukkan data</div>
+            
+            <table style="margin-top: 15px;">
+              <tr>
+                <th>Parameter</th>
+                <th>Nilai</th>
+                <th>Keterangan</th>
+              </tr>
+              <tr>
+                <td>EC Perkiraan</td>
+                <td>0.00 mS/cm</td>
+                <td>(Total gram pupuk / Volume air) × 0.65</td>
+              </tr>
+              <tr>
+                <td>TDS Perkiraan</td>
+                <td>0 ppm</td>
+                <td>EC × 640</td>
+              </tr>
+            </table>
+          </div>
+          
+          <p style="margin-top: 20px;"><i class="fas fa-info-circle"></i> <small>Nilai perhitungan EC dan TDS adalah perkiraan. Pengukuran aktual menggunakan alat EC meter dianjurkan.</small></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="section-title">
+        <div class="section-icon"><i class="fas fa-exchange-alt"></i></div>
+        <h2>Import & Export Data</h2>
+      </div>
+      
+      <div class="button-group">
+        <div class="file-input-wrapper">
+          <button class="secondary"><i class="fas fa-file-import"></i> Import Preset</button>
+          <input type="file" id="importPreset" accept=".json" />
+        </div>
+        
+        <button onclick="exportPreset()" class="secondary"><i class="fas fa-file-export"></i> Export Preset</button>
+        
+        <div class="file-input-wrapper">
+          <button class="secondary"><i class="fas fa-file-import"></i> Import Hasil</button>
+          <input type="file" id="importResult" accept=".json" />
+        </div>
+        
+        <button onclick="exportResult()" class="secondary"><i class="fas fa-file-export"></i> Export Hasil</button>
+      </div>
+      
+      <div class="json-container">
+        <h3><i class="fas fa-code"></i> Data JSON</h3>
+        <textarea id="jsonData" placeholder="Data JSON akan muncul di sini..."></textarea>
+        <div class="button-group">
+          <button onclick="copyJSON()"><i class="fas fa-copy"></i> Salin JSON</button>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <p><i class="fas fa-user"></i> Muhammad Kahfi Al Fauzan</p>
+      <p><i class="fas fa-copyright"></i> Kalkulator Racikan Pupuk AB Mix | Preset Pakar Pertanian</p>
+      <p><i class="fas fa-heart"></i> Dikembangkan untuk petani Indonesia</p>
+    </footer>
+  </div>
+
+  <script>
+    // Bahan pupuk
+    const bahan = [
+      { 
+        nama: "Kalium Klorida (KCl)", 
+        deskripsi: "Sumber kalium utama",
+        n: 0, p: 0, k: 60, s: 0, mg: 0, ca: 0, bagian: "A" 
+      },
+      { 
+        nama: "Kalium Sulfat (K₂SO₄)", 
+        deskripsi: "Sumber kalium dan sulfur",
+        n: 0, p: 0, k: 52, s: 18, mg: 0, ca: 0, bagian: "A" 
+      },
+      { 
+        nama: "Mono Kalium Fosfat (MKP)", 
+        deskripsi: "Sumber fosfor dan kalium",
+        n: 0, p: 52, k: 34, s: 0, mg: 0, ca: 0, bagian: "A" 
+      },
+      { 
+        nama: "Magnesium Sulfat (MgSO₄)", 
+        deskripsi: "Sumber magnesium dan sulfur",
+        n: 0, p: 0, k: 0, s: 13, mg: 16, ca: 0, bagian: "A" 
+      },
+      { 
+        nama: "Mono Amonium Fosfat (MAP)", 
+        deskripsi: "Sumber nitrogen dan fosfor",
+        n: 12, p: 61, k: 0, s: 0, mg: 0, ca: 0, bagian: "A" 
+      },
+      { 
+        nama: "Kalsium Nitrat (Ca(NO₃)₂)", 
+        deskripsi: "Sumber kalsium dan nitrogen",
+        n: 15.5, p: 0, k: 0, s: 0, mg: 0, ca: 26, bagian: "B" 
+      },
+      { 
+        nama: "Kalium Nitrat (KNO₃)", 
+        deskripsi: "Sumber nitrogen dan kalium",
+        n: 13, p: 0, k: 46, s: 0, mg: 0, ca: 0, bagian: "B" 
+      },
+    ];
+
+    // Rekomendasi PPM Ideal per Fase
+    const rekomendasiPPM = {
+      semai: { n: [40, 80], p: [20, 40], k: [40, 60], ec: [0.4, 0.8] },
+      vegetatif_akar: { n: [80, 120], p: [40, 60], k: [80, 100], ec: [0.8, 1.2] },
+      vegetatif_batang_daun: { n: [120, 200], p: [30, 50], k: [150, 200], ec: [1.2, 1.8] },
+      generatif_bunga: { n: [80, 140], p: [80, 120], k: [200, 250], ec: [1.8, 2.2] },
+      generatif_pembentukan_buah: { n: [60, 120], p: [70, 100], k: [250, 350], ec: [2.0, 2.5] },
+      generatif_pembesaran_buah: { n: [40, 80], p: [40, 60], k: [300, 400], ec: [2.2, 2.8] },
+      generatif_rasa_buah: { n: [20, 50], p: [30, 50], k: [350, 500], ec: [2.0, 2.5] }
+    };
+
+    // Preset Formula Pakar
+    const presetPupuk = {
+      // Formula Umum
+      semai: {
+        values: [30, 20, 0, 40, 40, 180, 30],
+        description: "Formula untuk fase persemaian, fokus pada perkembangan akar dan daun awal dengan NPK seimbang"
+      },
+      vegetatif_akar: {
+        values: [40, 50, 40, 40, 50, 200, 50],
+        description: "Formula untuk pertumbuhan akar optimal dengan peningkatan fosfor"
+      },
+      vegetatif_batang_daun: {
+        values: [120, 30, 100, 40, 70, 200, 100],
+        description: "Formula untuk pertumbuhan batang dan daun maksimal dengan nitrogen tinggi"
+      },
+      generatif_bunga: {
+        values: [80, 60, 150, 40, 100, 180, 150],
+        description: "Formula untuk persiapan pembungaan dengan peningkatan kalium dan fosfor"
+      },
+      generatif_pembentukan_buah: {
+        values: [60, 70, 180, 40, 100, 180, 160],
+        description: "Formula untuk pembentukan buah dengan kalium dan fosfor tinggi"
+      },
+      generatif_pembesaran_buah: {
+        values: [50, 80, 200, 40, 100, 180, 180],
+        description: "Formula untuk pembesaran buah dengan kalium tinggi"
+      },
+      generatif_rasa_buah: {
+        values: [40, 60, 220, 40, 100, 180, 200],
+        description: "Formula untuk meningkatkan rasa manis dengan kalium tinggi"
+      },
+      
+      // Tanaman Buah (Melon)
+      melon_semai: {
+        values: [35, 25, 5, 45, 45, 190, 35],
+        description: "Formula khusus semai melon dengan fokus pada akar awal"
+      },
+      melon_vegetatif_akar: {
+        values: [45, 55, 45, 45, 55, 210, 55],
+        description: "Formula untuk pertumbuhan akar melon yang optimal"
+      },
+      melon_vegetatif_batang_daun: {
+        values: [130, 35, 110, 45, 75, 210, 110],
+        description: "Formula untuk pertumbuhan batang dan daun melon yang kuat"
+      },
+      melon_generatif_bunga: {
+        values: [85, 65, 160, 45, 105, 190, 160],
+        description: "Formula untuk pembungaan melon dengan peningkatan fosfor"
+      },
+      melon_generatif_pembentukan: {
+        values: [65, 75, 190, 45, 105, 190, 170],
+        description: "Formula untuk pembentukan buah melon"
+      },
+      melon_generatif_pembesaran: {
+        values: [55, 85, 210, 45, 105, 190, 190],
+        description: "Formula untuk pembesaran buah melon"
+      },
+      melon_generatif_manis: {
+        values: [45, 65, 230, 45, 105, 190, 210],
+        description: "Formula untuk meningkatkan rasa manis melon"
+      },
+      
+      // Sayuran Hijau
+      sayuran_semai: {
+        values: [30, 20, 0, 40, 40, 180, 30],
+        description: "Formula untuk persemaian sayuran dengan nutrisi seimbang"
+      },
+      sayuran_vegetatif_akar: {
+        values: [40, 50, 30, 40, 50, 200, 50],
+        description: "Formula untuk pertumbuhan akar sayuran dengan fosfor tinggi"
+      },
+      sayuran_vegetatif_batang_daun: {
+        values: [140, 0, 130, 40, 80, 150, 130],
+        description: "Formula untuk pertumbuhan daun maksimal dengan nitrogen tinggi"
+      }
+    };
+
+    // Rekomendasi EC berdasarkan fase tanaman
+    const rekomendasiEC = {
+      semai: { min: 0.4, max: 0.8, name: "Semai" },
+      vegetatif_akar: { min: 0.8, max: 1.2, name: "Vegetatif Akar" },
+      vegetatif_batang_daun: { min: 1.2, max: 1.8, name: "Vegetatif Batang & Daun" },
+      generatif_bunga: { min: 1.8, max: 2.2, name: "Generatif Bunga" },
+      generatif_pembentukan_buah: { min: 2.0, max: 2.5, name: "Generatif Pembentukan Buah" },
+      generatif_pembesaran_buah: { min: 2.2, max: 2.8, name: "Generatif Pembesaran Buah" },
+      generatif_rasa_buah: { min: 2.0, max: 2.5, name: "Generatif Rasa Buah" }
+    };
+
+    // Inisialisasi tabel
+    function initTabel() {
+      const tbodyA = document.getElementById("tbodyA");
+      const tbodyB = document.getElementById("tbodyB");
+      tbodyA.innerHTML = '';
+      tbodyB.innerHTML = '';
+      
+      bahan.forEach((b, i) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td><strong>${b.nama}</strong><br><small style="color: #666; font-size: 0.85em;">${b.deskripsi}</small></td>
+          <td>${b.n}</td>
+          <td>${b.p}</td>
+          <td>${b.k}</td>
+          <td>${b.s}</td>
+          <td>${b.mg}</td>
+          <td>${b.ca}</td>
+          <td><input type="number" value="0" min="0" step="1" id="bahan${i}" inputmode="decimal" /></td>
+        `;
+        (b.bagian === "A" ? tbodyA : tbodyB).appendChild(row);
+      });
+    }
+
+    // Fungsi untuk memuat preset pupuk
+    function loadPresetPupuk() {
+      const preset = document.getElementById("presetPupuk").value;
+      
+      if (preset !== "custom" && presetPupuk[preset]) {
+        const values = presetPupuk[preset].values;
+        
+        // Isi nilai bahan sesuai preset
+        for (let i = 0; i < values.length; i++) {
+          const input = document.getElementById(`bahan${i}`);
+          if (input) {
+            input.value = values[i];
+          }
+        }
+        
+        // Tampilkan deskripsi preset
+        const presetDesc = document.createElement('div');
+        presetDesc.className = 'preset-description';
+        presetDesc.innerHTML = `<strong>Deskripsi Pakar:</strong> ${presetPupuk[preset].description}`;
+        
+        // Tambahkan deskripsi di atas hasil
+        const hasilDiv = document.getElementById("hasil");
+        hasilDiv.innerHTML = '';
+        hasilDiv.appendChild(presetDesc);
+        
+        // Hitung ulang hasil
+        hitung();
+      }
+    }
+
+    // Fungsi untuk mendapatkan rekomendasi EC
+    function getECRecommendation(ecValue, fase) {
+      const rekom = rekomendasiEC[fase];
+      if (!rekom) return { status: "Tidak Diketahui", color: "gray", class: "" };
+      
+      if (ecValue < rekom.min) {
+        return { 
+          status: "TERLALU RENDAH", 
+          color: "#4a8da8",
+          class: "ec-low",
+          message: `EC sebaiknya ditingkatkan (ideal ${rekom.min}-${rekom.max} mS/cm)`
+        };
+      } else if (ecValue > rekom.max) {
+        return { 
+          status: "TERLALU TINGGI", 
+          color: "#c94c4c",
+          class: "ec-high",
+          message: `EC sebaiknya diturunkan (ideal ${rekom.min}-${rekom.max} mS/cm)`
+        };
+      } else {
+        return { 
+          status: "IDEAL", 
+          color: "#2c6e3c",
+          class: "ec-good",
+          message: `EC dalam rentang ideal (${rekom.min}-${rekom.max} mS/cm)`
+        };
+      }
+    }
+    
+    // Fungsi untuk memeriksa status nutrisi berdasarkan rekomendasi PPM
+    function checkNutrientStatus(value, min, max) {
+      if (value < min) {
+        return { status: "TERLALU RENDAH", class: "status-low" };
+      } else if (value > max) {
+        return { status: "TERLALU TINGGI", class: "status-high" };
+      } else {
+        return { status: "IDEAL", class: "status-ideal" };
+      }
+    }
+
+    // Fungsi hitung kandungan dengan volume air dinamis
+    function hitung() {
+      // Dapatkan volume air dari input
+      const volumeAir = parseFloat(document.getElementById("volumeAir").value) || 1;
+      const fase = document.getElementById("faseTanaman").value;
+      
+      let total = { n: 0, p: 0, k: 0, s: 0, mg: 0, ca: 0 };
+      let totalGram = 0;
+      
+      bahan.forEach((b, i) => {
+        const input = document.getElementById(`bahan${i}`);
+        const g = input ? parseFloat(input.value) || 0 : 0;
+        total.n += b.n * g / 100;
+        total.p += b.p * g / 100;
+        total.k += b.k * g / 100;
+        total.s += b.s * g / 100;
+        total.mg += b.mg * g / 100;
+        total.ca += b.ca * g / 100;
+        totalGram += g;
+      });
+      
+      // Perhitungan ppm berdasarkan volume air
+      const ppmFactor = 1000 / volumeAir;
+      
+      // Perhitungan EC: (Total Gram Pupuk / Volume Air) × 0.65
+      const ecPerkiraan = (totalGram / volumeAir) * 0.65;
+      
+      // Konversi ke TDS
+      const tdsPerkiraan = ecPerkiraan * 640;
+      
+      // Dapatkan rekomendasi EC
+      const ecRekom = getECRecommendation(ecPerkiraan, fase);
+      const faseName = rekomendasiEC[fase] ? rekomendasiEC[fase].name : "Tidak Diketahui";
+      
+      // Periksa status nutrisi berdasarkan rekomendasi PPM
+      let statusHTML = '';
+      if (rekomendasiPPM[fase]) {
+        const n_ppm = Math.round(total.n * ppmFactor);
+        const p_ppm = Math.round(total.p * ppmFactor);
+        const k_ppm = Math.round(total.k * ppmFactor);
+        
+        const nStatus = checkNutrientStatus(n_ppm, rekomendasiPPM[fase].n[0], rekomendasiPPM[fase].n[1]);
+        const pStatus = checkNutrientStatus(p_ppm, rekomendasiPPM[fase].p[0], rekomendasiPPM[fase].p[1]);
+        const kStatus = checkNutrientStatus(k_ppm, rekomendasiPPM[fase].k[0], rekomendasiPPM[fase].k[1]);
+        
+        statusHTML = `
+          <div class="ppm-recommendation">
+            <h4><i class="fas fa-check-circle"></i> Status Nutrisi untuk Fase ${faseName}</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nutrisi</th>
+                  <th>Hasil Anda</th>
+                  <th>Rekomendasi</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Nitrogen (N)</td>
+                  <td>${n_ppm} ppm</td>
+                  <td>${rekomendasiPPM[fase].n[0]} - ${rekomendasiPPM[fase].n[1]} ppm</td>
+                  <td><span class="nutrient-status ${nStatus.class}">${nStatus.status}</span></td>
+                </tr>
+                <tr>
+                  <td>Fosfor (P₂O₅)</td>
+                  <td>${p_ppm} ppm</td>
+                  <td>${rekomendasiPPM[fase].p[0]} - ${rekomendasiPPM[fase].p[1]} ppm</td>
+                  <td><span class="nutrient-status ${pStatus.class}">${pStatus.status}</span></td>
+                </tr>
+                <tr>
+                  <td>Kalium (K₂O)</td>
+                  <td>${k_ppm} ppm</td>
+                  <td>${rekomendasiPPM[fase].k[0]} - ${rekomendasiPPM[fase].k[1]} ppm</td>
+                  <td><span class="nutrient-status ${kStatus.class}">${kStatus.status}</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+      
+      // Perbarui info volume air
+      document.querySelector('.volume-info p .value').textContent = `${volumeAir} Liter`;
+      
+      const hasil = `
+        <div class="result-box">
+          <h3><i class="fas fa-tint"></i> Hasil Perhitungan untuk ${volumeAir} Liter Air</h3>
+          
+          <div class="volume-info">
+            <p><i class="fas fa-weight-hanging"></i> Total pupuk yang digunakan: <span class="value">${totalGram.toFixed(2)} gram</span></p>
+            <p><i class="fas fa-flask"></i> Konsentrasi: <span class="value">${(totalGram / volumeAir).toFixed(2)} g/L</span></p>
+          </div>
+          
+          <div class="nutrient-summary">
+            <div class="nutrient-card">
+              <div class="nutrient-name"><i class="fas fa-leaf"></i> Nitrogen (N)</div>
+              <div class="nutrient-value">${(total.n * ppmFactor).toFixed(0)} ppm</div>
+              <div>${total.n.toFixed(2)} g</div>
+              <div><small>Pertumbuhan vegetatif</small></div>
+            </div>
+            
+            <div class="nutrient-card">
+              <div class="nutrient-name"><i class="fas fa-root"></i> Fosfor (P₂O₅)</div>
+              <div class="nutrient-value">${(total.p * ppmFactor).toFixed(0)} ppm</div>
+              <div>${total.p.toFixed(2)} g</div>
+              <div><small>Perkembangan akar & bunga</small></div>
+            </div>
+            
+            <div class="nutrient-card">
+              <div class="nutrient-name"><i class="fas fa-apple-alt"></i> Kalium (K₂O)</div>
+              <div class="nutrient-value">${(total.k * ppmFactor).toFixed(0)} ppm</div>
+              <div>${total.k.toFixed(2)} g</div>
+              <div><small>Pembungaan & ketahanan</small></div>
+            </div>
+            
+            <div class="nutrient-card">
+              <div class="nutrient-name"><i class="fas fa-seedling"></i> Total Nutrisi</div>
+              <div class="nutrient-value">${totalGram.toFixed(0)} g</div>
+              <div>dalam ${volumeAir} L air</div>
+            </div>
+          </div>
+          
+          ${statusHTML}
+          
+          <h3><i class="fas fa-bolt"></i> Electrical Conductivity (EC)</h3>
+          <div class="ec-status-card">
+            <div class="ec-value">${ecPerkiraan.toFixed(2)} mS/cm</div>
+            <div class="ec-ideal">EC Ideal untuk fase ${faseName}: ${rekomendasiEC[fase] ? rekomendasiEC[fase].min + "-" + rekomendasiEC[fase].max + " mS/cm" : "-"}</div>
+            <div class="ec-status ${ecRekom.class}">Status: ${ecRekom.status}</div>
+            <div style="text-align: center; margin: 10px 0; font-size: 1rem; color: ${ecRekom.color}">
+              ${ecRekom.message}
+            </div>
+            
+            <table style="margin-top: 15px;">
+              <tr>
+                <th>Parameter</th>
+                <th>Nilai</th>
+                <th>Keterangan</th>
+              </tr>
+              <tr>
+                <td>EC Perkiraan</td>
+                <td>${ecPerkiraan.toFixed(2)} mS/cm</td>
+                <td>(Total gram pupuk / Volume air) × 0.65</td>
+              </tr>
+              <tr>
+                <td>TDS Perkiraan</td>
+                <td>${tdsPerkiraan.toFixed(0)} ppm</td>
+                <td>EC × 640</td>
+              </tr>
+            </table>
+          </div>
+          
+          <h3><i class="fas fa-flask"></i> Nutrisi Mikro</h3>
+          <table>
+            <tr>
+              <th>Nutrisi</th>
+              <th>ppm</th>
+              <th>Gram</th>
+            </tr>
+            <tr>
+              <td>Sulfur (S)</td>
+              <td>${(total.s * ppmFactor).toFixed(0)} ppm</td>
+              <td>${total.s.toFixed(2)} g</td>
+            </tr>
+            <tr>
+              <td>Magnesium (MgO)</td>
+              <td>${(total.mg * ppmFactor).toFixed(0)} ppm</td>
+              <td>${total.mg.toFixed(2)} g</td>
+            </tr>
+            <tr>
+              <td>Kalsium (CaO)</td>
+              <td>${(total.ca * ppmFactor).toFixed(0)} ppm</td>
+              <td>${total.ca.toFixed(2)} g</td>
+            </tr>
+          </table>
+          
+          <p style="margin-top: 20px;"><i class="fas fa-info-circle"></i> <small>Nilai perhitungan EC dan TDS adalah perkiraan. Pengukuran aktual menggunakan alat EC meter dianjurkan.</small></p>
+        </div>
+      `;
+      document.getElementById("hasil").innerHTML = hasil;
+      
+      // Simpan data untuk export
+      currentData = {
+        volumeAir: volumeAir,
+        faseTanaman: fase,
+        preset: document.getElementById("presetPupuk").value,
+        bahan: bahan.map((b, i) => ({
+          nama: b.nama,
+          gram: parseFloat(document.getElementById(`bahan${i}`).value) || 0
+        })),
+        hasil: {
+          totalGram: totalGram,
+          nutrients: {
+            n: total.n,
+            p: total.p,
+            k: total.k,
+            s: total.s,
+            mg: total.mg,
+            ca: total.ca
+          },
+          ec: ecPerkiraan,
+          tds: tdsPerkiraan
+        }
+      };
+      
+      // Tampilkan data JSON
+      document.getElementById("jsonData").value = JSON.stringify(currentData, null, 2);
+    }
+
+    // Fungsi untuk mereset form
+    function resetForm() {
+      bahan.forEach((b, i) => {
+        const input = document.getElementById(`bahan${i}`);
+        if (input) {
+          input.value = 0;
+        }
+      });
+      
+      document.getElementById("volumeAir").value = 1;
+      document.getElementById("faseTanaman").value = "semai";
+      document.getElementById("presetPupuk").value = "custom";
+      
+      hitung();
+    }
+
+    // Fungsi untuk export preset
+    function exportPreset() {
+      const dataStr = JSON.stringify(presetPupuk, null, 2);
+      const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+      const exportFileName = 'abmix_presets.json';
+      
+      const linkElement = document.createElement('a');
+      linkElement.setAttribute('href', dataUri);
+      linkElement.setAttribute('download', exportFileName);
+      document.body.appendChild(linkElement);
+      linkElement.click();
+      document.body.removeChild(linkElement);
+    }
+
+    // Fungsi untuk export hasil
+    function exportResult() {
+      if (!currentData) {
+        alert("Silakan hitung kandungan terlebih dahulu");
+        return;
+      }
+      
+      const dataStr = JSON.stringify(currentData, null, 2);
+      const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+      const exportFileName = 'abmix_result.json';
+      
+      const linkElement = document.createElement('a');
+      linkElement.setAttribute('href', dataUri);
+      linkElement.setAttribute('download', exportFileName);
+      document.body.appendChild(linkElement);
+      linkElement.click();
+      document.body.removeChild(linkElement);
+    }
+
+    // Fungsi untuk menyalin JSON
+    function copyJSON() {
+      const jsonTextarea = document.getElementById("jsonData");
+      jsonTextarea.select();
+      document.execCommand("copy");
+      alert("JSON telah disalin ke clipboard!");
+    }
+
+    // Fungsi untuk import preset - PERBAIKAN
+    document.getElementById("importPreset").addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          const presetSelect = document.getElementById("presetPupuk");
+          
+          // Cari optgroup "Custom"
+          let customOptgroup = document.getElementById("customPresetGroup");
+          
+          // Jika tidak ada, buat baru
+          if (!customOptgroup) {
+            customOptgroup = document.createElement('optgroup');
+            customOptgroup.label = 'Custom';
+            customOptgroup.id = 'customPresetGroup';
+            presetSelect.appendChild(customOptgroup);
+          }
+          
+          let count = 0;
+          for (const key in imported) {
+            // Skip jika preset sudah ada
+            if (presetPupuk.hasOwnProperty(key)) {
+              console.log(`Preset ${key} sudah ada, dilewati`);
+              continue;
+            }
+            
+            // Tambahkan ke objek presetPupuk
+            presetPupuk[key] = imported[key];
+            
+            // Tambahkan opsi ke dalam optgroup Custom
+            const newOption = document.createElement('option');
+            newOption.value = key;
+            newOption.textContent = key.replace(/_/g, ' ');
+            customOptgroup.appendChild(newOption);
+            
+            count++;
+          }
+          
+          if (count > 0) {
+            alert(`Berhasil mengimpor ${count} preset baru!`);
+          } else {
+            alert("Tidak ada preset baru yang diimpor (semua preset sudah ada)");
+          }
+        } catch (err) {
+          alert("Gagal mengimpor preset: " + err.message);
+        } finally {
+          // Reset input file
+          e.target.value = '';
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    // Fungsi untuk import hasil
+    document.getElementById("importResult").addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          
+          // Set nilai bahan
+          imported.bahan.forEach((b, i) => {
+            if (i < bahan.length) {
+              document.getElementById(`bahan${i}`).value = b.gram;
+            }
+          });
+          
+          // Set volume air
+          if (imported.volumeAir) {
+            document.getElementById("volumeAir").value = imported.volumeAir;
+          }
+          
+          // Set fase tanaman
+          if (imported.faseTanaman) {
+            document.getElementById("faseTanaman").value = imported.faseTanaman;
+          }
+          
+          // Set preset
+          if (imported.preset) {
+            document.getElementById("presetPupuk").value = imported.preset;
+          }
+          
+          // Hitung ulang
+          hitung();
+          
+          alert("Data hasil berhasil diimpor!");
+        } catch (err) {
+          alert("Gagal mengimpor data hasil: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    // Inisialisasi aplikasi
+    function initApp() {
+      initTabel();
+      
+      // Tambahkan event listener
+      document.getElementById("volumeAir").addEventListener('input', hitung);
+      document.getElementById("faseTanaman").addEventListener('change', hitung);
+      document.getElementById("presetPupuk").addEventListener('change', loadPresetPupuk);
+      
+      // Tambahkan event listener untuk semua input bahan
+      bahan.forEach((b, i) => {
+        const input = document.getElementById(`bahan${i}`);
+        if (input) {
+          input.addEventListener('input', function() {
+            // Reset preset jika input diubah manual
+            document.getElementById('presetPupuk').value = 'custom';
+            hitung();
+          });
+        }
+      });
+      
+      // Hitung pertama kali
+      hitung();
+    }
+    
+    // Jalankan inisialisasi saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
