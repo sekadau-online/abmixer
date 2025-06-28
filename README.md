@@ -5,7 +5,7 @@
 
 Sistem rekomendasi nutrisi tanaman yang dirancang khusus untuk kondisi iklim khatulistiwa dengan suhu tinggi (>30°C). Proyek ini membantu petani menghindari overdosis nutrisi akibat penguapan tinggi dan stres panas.
 
-![Preview Aplikasi]
+![Preview Aplikasi](screenshot.png)
 ![{BC6D40B9-BA37-4B6A-A1DC-6BD37D67469C}](https://github.com/user-attachments/assets/f18ab457-f2e7-491e-9b9a-29fcb906fff7)
 ![{18605852-F602-42DB-9CEE-6CC0A95D6B86}](https://github.com/user-attachments/assets/dc8359f9-93da-4206-bbc4-df6c24ad2a22)
 
@@ -95,3 +95,42 @@ Di iklim khatulistiwa, suhu tinggi menyebabkan masalah unik pada nutrisi tanaman
 1. Clone repositori:
    ```bash
    git clone https://github.com/sekadau-online/abmixer.git
+
+2.   Buka file HTML di browser:
+
+        abmix.html: Kalkulator pupuk AB Mix
+
+        recomendation.html: Rekomendasi khusus iklim khatulistiwa
+
+    Untuk petani:
+
+        Pantau suhu harian
+
+        Ukur EC zona akar setiap 3 hari (target 0.8-1.2 mS/cm)
+
+        Lakukan flushing mingguan dengan volume air = 2x volume media
+
+📊 Deteksi Dini Masalah Nutrisi
+Gejala	Kemungkinan Penyebab	Solusi
+Daun kaku + dingin	EC aman	Pertahankan protokol
+Daun lemas + hangat	EC terlalu tinggi	Turunkan EC 0.2 mS/cm
+Ujung daun kuning	Overdosis garam	Flushing + turunkan EC
+Pertumbuhan terhambat	Akumulasi garam	Ganti media + flushing
+
+Tes Sederhana: Campur sampel media dengan air destilasi (1:5), ukur EC. Jika >1.5 mS/cm, segera lakukan flushing.
+🤝 Berkontribusi
+
+Kontribusi terbuka untuk:
+
+    Menambahkan preset tanaman tropis baru
+
+    Memperbaiki algoritma penyesuaian suhu
+
+    Mengembangkan modul prediksi cuaca
+
+📜 Lisensi
+
+Proyek ini dilisensikan di bawah MIT License.
+
+Dikembangkan Oleh muhammad Kahfi Al Fauzan dengan ❤️ untuk petani Indonesia
+© 2023 Rekomendasi Pertanian Tropis
