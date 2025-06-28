@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekomendasi Nutrisi Tanaman - Iklim Khatulistiwa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a2a6c;
+            --secondary: #b21f1f;
+            --accent: #ff9a00;
+            --success: #27ae60;
+            --warning: #e74c3c;
+            --info: #3498db;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --text: #333;
+            --bg-gradient: linear-gradient(135deg, var(--primary), var(--secondary), var(--primary));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: var(--bg-gradient);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), var(--warning), var(--accent));
+            animation: gradientAnimation 3s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        h1 {
+            color: var(--dark);
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            color: var(--warning);
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid var(--info);
+            animation: fadeInUp 0.5s ease-out;
+            backdrop-filter: blur(5px);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+        
+        .card-important {
+            border-top-color: var(--warning);
+        }
+        
+        .card-title {
+            display: flex;
+            align-items: center;
+            color: var(--dark);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #eee;
+        }
+        
+        .card-title i {
+            margin-right: 15px;
+            font-size: 1.8rem;
+            color: var(--info);
+        }
+        
+        .card-important .card-title i {
+            color: var(--warning);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        table:hover {
+            transform: scale(1.01);
+        }
+        
+        th {
+            background: linear-gradient(135deg, var(--info), var(--dark));
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e9f7fe;
+        }
+        
+        .highlight {
+            background: #fff9db;
+            color: #e67700;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        
+        .warning {
+            background: #ffe8e8;
+            color: #e03131;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        
+        .tip {
+            background: #d3f9d8;
+            border-left: 4px solid var(--success);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .tip:hover {
+            transform: translateX(5px);
+        }
+        
+        .step-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .step-list li {
+            padding: 12px 0 12px 40px;
+            position: relative;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .step-list li:hover {
+            background: #f0f7ff;
+            border-radius: 8px;
+        }
+        
+        .step-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background: var(--info);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 15px;
+            margin-top: 30px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .temp-adjustment {
+            background: #e9f7fe;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        .formula-card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .formula-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid var(--info);
+            transition: all 0.3s ease;
+        }
+        
+        .formula-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .phase-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .phase-tab {
+            padding: 12px 20px;
+            background: #e9ecef;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .phase-tab.active {
+            background: var(--info);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .ec-graph {
+            display: flex;
+            align-items: flex-end;
+            height: 200px;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .ec-bar {
+            flex: 1;
+            background: var(--info);
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            transition: height 0.5s ease;
+        }
+        
+        .ec-bar-label {
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .ec-bar-value {
+            position: absolute;
+            top: -25px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            color: var(--info);
+        }
+        
+        .accordion {
+            margin: 20px 0;
+        }
+        
+        .accordion-header {
+            background: var(--info);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-header:hover {
+            background: #2980b9;
+        }
+        
+        .accordion-content {
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+            border-radius: 0 0 8px 8px;
+        }
+        
+        .accordion-content.show {
+            padding: 15px;
+            max-height: 1000px;
+        }
+        
+        .temp-slider-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .temp-slider {
+            width: 100%;
+            height: 25px;
+            margin: 15px 0;
+            background: linear-gradient(90deg, #3498db, #e74c3c);
+            border-radius: 20px;
+            outline: none;
+        }
+        
+        .temp-display {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+        }
+        
+        .temp-result {
+            text-align: center;
+            padding: 10px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 8px;
+            margin-top: 10px;
+            font-weight: bold;
+            color: var(--warning);
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+        
+        /* Initial state for animations */
+        .card {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .footer {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-sun"></i> Rekomendasi Nutrisi Tanaman untuk Iklim Khatulistiwa</h1>
+            <p class="subtitle">Penyesuaian EC dan PPM berdasarkan kondisi suhu tinggi dan radiasi matahari intens</p>
+            <p>Diformulasikan khusus untuk mencegah overdosis pada suhu >30°C</p>
+        </header>
+
+        <div class="content-grid">
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-chart-line"></i> Rekomendasi EC & PPM</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fase Pertumbuhan</th>
+                            <th>EC Target (mS/cm)</th>
+                            <th>Total PPM</th>
+                            <th>Rentang Aman</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Awal Vegetatif</td>
+                            <td>0.4-0.5</td>
+                            <td>200-250</td>
+                            <td><span class="highlight">▼ 60% dari standar</span></td>
+                        </tr>
+                        <tr>
+                            <td>Vegetatif Intensif</td>
+                            <td>0.6-0.8</td>
+                            <td>300-400</td>
+                            <td><span class="highlight">▼ 50% dari standar</span></td>
+                        </tr>
+                        <tr>
+                            <td>Transisi Generatif</td>
+                            <td>0.8-1.0</td>
+                            <td>400-500</td>
+                            <td><span class="highlight">▼ 55% dari standar</span></td>
+                        </tr>
+                        <tr>
+                            <td>Generatif/Pembuahan</td>
+                            <td>1.0-1.2</td>
+                            <td>500-600</td>
+                            <td><span class="highlight">▼ 65% dari standar</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="temp-adjustment">
+                    <i class="fas fa-temperature-high"></i> Setiap kenaikan 1°C di atas 32°C, turunkan EC tambahan 0.1 mS/cm
+                </div>
+                
+                <div class="ec-graph" id="ecGraph">
+                    <!-- Dynamic bars will be inserted here -->
+                </div>
+                
+                <div class="temp-slider-container">
+                    <h3>Penyesuaian EC Berdasarkan Suhu:</h3>
+                    <input type="range" min="30" max="40" value="32" class="temp-slider" id="tempSlider">
+                    <div class="temp-display">
+                        <span>30°C</span>
+                        <span id="currentTemp">32°C</span>
+                        <span>40°C</span>
+                    </div>
+                    <div class="temp-result" id="ecAdjustment">
+                        EC yang direkomendasikan: 0.8-1.0 mS/cm
+                    </div>
+                </div>
+                
+                <div class="tip">
+                    <strong><i class="fas fa-lightbulb"></i> Tip Penting:</strong> Di iklim khatulistiwa, tanaman lebih sensitif terhadap garam karena transpirasi tinggi. 
+                    Formula rendah EC dengan aplikasi sering lebih efektif daripada EC tinggi sekaligus.
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-flask"></i> Formula Nutrisi Khatulistiwa</h2>
+                
+                <div class="phase-tabs">
+                    <div class="phase-tab active" data-phase="vegetative">Vegetatif</div>
+                    <div class="phase-tab" data-phase="generative">Generatif</div>
+                </div>
+                
+                <div class="formula-card" id="vegetative-formula">
+                    <div class="formula-item">
+                        <span>Nitrogen (N)</span>
+                        <span>25 ppm (dari KNO₃, CaNO₃)</span>
+                    </div>
+                    <div class="formula-item">
+                        <span>Kalium (K)</span>
+                        <span>80 ppm (dari K₂SO₄)</span>
+                    </div>
+                    <div class="formula-item">
+                        <span>Kalsium (Ca)</span>
+                        <span>60 ppm (dari CaNO₃)</span>
+                    </div>
+                    <div class="formula-item">
+                        <span>Magnesium (Mg)</span>
+                        <span>30 ppm (dari MgSO₄)</span>
+                    </div>
+                    <div class="formula-item">
+                        <span>Sulfur (S)</span>
+                        <span>40 ppm (dari MgSO₄)</span>
+                    </div>
+                    <div class="formula-item">
+                        <span>Fosfor (P)</span>
+                        <span>15 ppm (dari MKP)</span>
+                    </div>
+                    <div class="formula-item">
+                        <span>Mikronutrien</span>
+                        <span>2-3 ppm (Fe-EDDHA wajib)</span>
+                    </div>
+                </div>
+                
+                <div class="formula-card" id="generative-formula" style="display:none;">
+                    <div class="formula-item">
+                        <span>Nitrogen (N)</span>
+                        <span>20 ppm (dari KNO₃, CaNO₃)</span>
+                    </div>
+                    <div class="formula-item">
+                        <span>Kalium (K)</span>
+                        <span>120 ppm (dari K₂SO₄)</span>
+                    </div>
+                    <div class="formula-item">
+                        <span>Kalsium (Ca)</span>
+                        <span>60 ppm (dari CaNO₃)</span>
+                    </div>
+                    <div class="formula-item">
+                        <span>Magnesium (Mg)</span>
+                        <span>30 ppm (dari MgSO₄)</span>
+                    </div>
+                    <div class="formula-item">
+                        <span>Sulfur (S)</span>
+                        <span>40 ppm (dari MgSO₄)</span>
+                    </div>
+                    <div class="formula-item">
+                        <span>Fosfor (P)</span>
+                        <span>25 ppm (dari MKP)</span>
+                    </div>
+                    <div class="formula-item">
+                        <span>Mikronutrien</span>
+                        <span>2-3 ppm (Fe-EDDHA wajib)</span>
+                    </div>
+                </div>
+                
+                <div class="accordion">
+                    <div class="accordion-header" id="warningHeader">
+                        <span><i class="fas fa-skull-crossbones"></i> Peringatan Khusus</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content" id="warningContent">
+                        <p>Hindari urea/NH₄⁺ >5ppm karena risiko toksisitas amonia di suhu tinggi.</p>
+                        <p>Kalium (K) ditingkatkan untuk mitigasi stres panas.</p>
+                        <p>Gunakan Fe-EDDHA karena lebih stabil pada pH tinggi dibandingkan Fe-EDTA.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-important">
+                <h2 class="card-title"><i class="fas fa-calendar-day"></i> Protokol Aplikasi Harian</h2>
+                <ul class="step-list">
+                    <li><strong>Pagi (06:00-07:00):</strong> Beri larutan nutrisi penuh (EC sesuai fase) dengan volume 20% lebih banyak</li>
+                    <li><strong>Siang (10:00-11:00):</strong> Flushing cepat dengan air bersih (EC 0) 100-200 mL/pot</li>
+                    <li><strong>Sore (15:00-16:00):</strong> Beri larutan nutrisi setengah konsentrasi + asam humat 0.5%</li>
+                    <li><strong>Setiap 3 hari:</strong> Ukur EC zona akar (target 0.8-1.2 mS/cm)</li>
+                    <li><strong>Mingguan:</strong> Flushing menyeluruh dengan volume air = 2x volume media</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-thermometer-half"></i> Teknik Mitigasi Panas</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Teknik</th>
+                            <th>Implementasi</th>
+                            <th>Manfaat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Komposisi Media</td>
+                            <td>Cocopeat 50%, Perlit 30%, Biochar 15%, Vermikulit 5%</td>
+                            <td>Penahan air + aerasi + penyerap garam</td>
+                        </tr>
+                        <tr>
+                            <td>Pendinginan Pot</td>
+                            <td>Lapisi aluminium foil + batang pisang kering</td>
+                            <td>Pantulkan radiasi + insulasi termal</td>
+                        </tr>
+                        <tr>
+                            <td>Naungan</td>
+                            <td>Paranet 40-50% (jam 11-15)</td>
+                            <td>Turunkan suhu 3-5°C</td>
+                        </tr>
+                        <tr>
+                            <td>Penjadwalan</td>
+                            <td>Siram saat suhu < 30°C (pagi/sore)</td>
+                            <td>Hindari stres panas</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-leaf"></i> Deteksi Dini Overdosis</h2>
+                <ul class="step-list">
+                    <li><strong>Daun kaku + dingin:</strong> EC aman</li>
+                    <li><strong>Daun lemas + hangat:</strong> EC terlalu tinggi</li>
+                    <li><strong>Ujung daun kuning pucat:</strong> Overdosis garam</li>
+                    <li><strong>Daun menggulung ke atas:</strong> Stres panas akut</li>
+                    <li><strong>Pertumbuhan terhambat:</strong> Akumulasi garam di zona akar</li>
+                </ul>
+                
+                <div class="tip">
+                    <strong><i class="fas fa-vial"></i> Tes Sederhana:</strong> Campur sampel media dengan air destilasi (1:5), ukur EC. 
+                    Jika >1.5 mS/cm, segera lakukan flushing.
+                </div>
+            </div>
+
+            <div class="card card-important">
+                <h2 class="card-title"><i class="fas fa-first-aid"></i> Action Plan Overdosis</h2>
+                
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>Tahap Akut (daun mengering)</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <ul class="step-list">
+                            <li>Rendam pot dalam air bersih (30 menit)</li>
+                            <li>Semprot daun dengan campuran: air kelapa 100 mL/L + asam humat 2 mL/L + silika 1 mL/L</li>
+                            <li>Naungi 70% selama 48 jam</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="accordion">
+                    <div class="accordion-header">
+                        <span>Pemulihan (3-7 hari)</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <ul class="step-list">
+                            <li>Turunkan EC ke 0.4 mS/cm</li>
+                            <li>Beri bakteri rhizobium</li>
+                            <li>Naungi 50% selama 3 hari</li>
+                            <li>Tambah frekuensi flushing siang hari</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h3>Rekomendasi Nutrisi Tanaman untuk Iklim Khatulistiwa</h3>
+            <p>Diformulasikan berdasarkan pengalaman uji coba dan kondisi suhu tinggi (>30°C)</p>
+            <p>© 2023 Rekomendasi Pertanian Tropis | Disesuaikan dengan kondisi lokal</p>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality for vegetative/generative tabs
+        document.querySelectorAll('.phase-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.phase-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Show the corresponding formula
+                const phase = this.getAttribute('data-phase');
+                document.getElementById('vegetative-formula').style.display = 
+                    phase === 'vegetative' ? 'block' : 'none';
+                document.getElementById('generative-formula').style.display = 
+                    phase === 'generative' ? 'block' : 'none';
+            });
+        });
+        
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('.fa-chevron-down');
+                
+                // Toggle content
+                content.classList.toggle('show');
+                
+                // Rotate icon
+                icon.style.transform = content.classList.contains('show') 
+                    ? 'rotate(180deg)' 
+                    : 'rotate(0deg)';
+            });
+        });
+        
+        // Create EC graph
+        function createECGraph() {
+            const phases = [
+                { name: 'Awal Vegetatif', ec: 0.45, color: '#1abc9c' },
+                { name: 'Vegetatif Intensif', ec: 0.7, color: '#2ecc71' },
+                { name: 'Transisi Generatif', ec: 0.9, color: '#3498db' },
+                { name: 'Generatif', ec: 1.1, color: '#9b59b6' }
+            ];
+            
+            const graphContainer = document.getElementById('ecGraph');
+            graphContainer.innerHTML = '';
+            
+            phases.forEach(phase => {
+                const barHeight = (phase.ec / 1.2) * 180; // 1.2 is max EC
+                const bar = document.createElement('div');
+                bar.className = 'ec-bar';
+                bar.style.height = `${barHeight}px`;
+                bar.style.background = phase.color;
+                
+                const value = document.createElement('div');
+                value.className = 'ec-bar-value';
+                value.textContent = `${phase.ec} mS/cm`;
+                
+                const label = document.createElement('div');
+                label.className = 'ec-bar-label';
+                label.textContent = phase.name;
+                
+                bar.appendChild(value);
+                bar.appendChild(label);
+                graphContainer.appendChild(bar);
+            });
+        }
+        
+        // Temperature slider functionality
+        const tempSlider = document.getElementById('tempSlider');
+        const currentTemp = document.getElementById('currentTemp');
+        const ecAdjustment = document.getElementById('ecAdjustment');
+        
+        tempSlider.addEventListener('input', function() {
+            const temp = parseInt(this.value);
+            currentTemp.textContent = `${temp}°C`;
+            
+            let ecRecommendation = '';
+            if (temp <= 32) {
+                ecRecommendation = "EC yang direkomendasikan: 0.8-1.0 mS/cm";
+            } else if (temp <= 34) {
+                ecRecommendation = "EC yang direkomendasikan: 0.7-0.9 mS/cm";
+            } else if (temp <= 36) {
+                ecRecommendation = "EC yang direkomendasikan: 0.6-0.8 mS/cm";
+            } else {
+                ecRecommendation = "EC yang direkomendasikan: 0.5-0.7 mS/cm";
+            }
+            
+            ecAdjustment.textContent = ecRecommendation;
+        });
+        
+        // Animation on scroll
+        function animateOnScroll() {
+            const cards = document.querySelectorAll('.card');
+            const footer = document.querySelector('.footer');
+            
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (cardTop < windowHeight - 50) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+            
+            const footerTop = footer.getBoundingClientRect().top;
+            if (footerTop < window.innerHeight - 50) {
+                footer.style.opacity = '1';
+            }
+        }
+        
+        // Initial animations
+        document.addEventListener('DOMContentLoaded', function() {
+            createECGraph();
+            
+            // Open warning accordion by default
+            document.getElementById('warningContent').classList.add('show');
+            document.querySelector('#warningHeader .fa-chevron-down').style.transform = 'rotate(180deg)';
+            
+            // Animate cards on load
+            setTimeout(() => {
+                animateOnScroll();
+            }, 300);
+            
+            // Animate on scroll
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>
