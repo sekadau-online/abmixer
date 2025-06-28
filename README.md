@@ -131,5 +131,5 @@ Kontribusi terbuka untuk:
 
 Proyek ini dilisensikan di bawah MIT License.
 
-Dikembangkan Oleh muhammad Kahfi Al Fauzan dengan ❤️ untuk petani Indonesia
+Dikembangkan Oleh Muhammad Kahfi Al Fauzan dengan ❤️ untuk petani Indonesia
 © 2023 Rekomendasi Pertanian Tropis
