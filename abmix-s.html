@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Pupuk AB Mix - Iklim Khatulistiwa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a5d1a 0%, #2e854e 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        header h1 {
+            color: #1a5d1a;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            color: #2e854e;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .badge {
+            background: #1a5d1a;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .calculator-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-title {
+            color: #1a5d1a;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2e854e;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #c8e6c9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            border-color: #1a5d1a;
+            outline: none;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #1a5d1a 0%, #2e854e 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .result-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .result-title {
+            color: #1a5d1a;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .result-content {
+            background-color: #e8f5e9;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #c8e6c9;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .result-value {
+            font-weight: 700;
+            color: #1a5d1a;
+            font-size: 1.1rem;
+        }
+        
+        .adjustment-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            grid-column: 1 / -1;
+            margin-top: 20px;
+        }
+        
+        .adjustment-title {
+            color: #1a5d1a;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .phase-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background-color: #e8f5e9;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .phase-table th {
+            background-color: #1a5d1a;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .phase-table td {
+            padding: 15px;
+            border-bottom: 1px solid #c8e6c9;
+        }
+        
+        .phase-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .phase-table tr:nth-child(even) {
+            background-color: #d0ecd3;
+        }
+        
+        .info-section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            margin-top: 30px;
+        }
+        
+        .info-title {
+            color: #1a5d1a;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .info-card {
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #1a5d1a;
+        }
+        
+        .info-card h3 {
+            color: #1a5d1a;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .temp-warning {
+            background-color: #ffecb3;
+            color: #5d4037;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .solution-highlight {
+            background-color: #e1f5fe;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #0288d1;
+        }
+        
+        .solution-highlight i {
+            color: #0288d1;
+        }
+        
+        .phase-indicator {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .veg { background-color: #4caf50; }
+        .transition { background-color: #ff9800; }
+        .gen { background-color: #f44336; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-seedling"></i> Kalkulator Pupuk AB Mix untuk Iklim Khatulistiwa</h1>
+            <p class="tagline">Sistem rekomendasi nutrisi tanaman khusus untuk suhu tinggi (>30°C)</p>
+            <div class="badges">
+                <div class="badge"><i class="fas fa-temperature-high"></i> Adaptasi Suhu Tinggi</div>
+                <div class="badge"><i class="fas fa-tint"></i> Pencegahan Overdosis</div>
+                <div class="badge"><i class="fas fa-leaf"></i> Rekomendasi Tropis</div>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="calculator-card">
+                <h2 class="card-title"><i class="fas fa-calculator"></i> Parameter Nutrisi</h2>
+                <div class="input-group">
+                    <label for="phase"><i class="fas fa-tree"></i> Fase Pertumbuhan</label>
+                    <select id="phase">
+                        <option value="early_veg">Awal Vegetatif</option>
+                        <option value="intensive_veg">Vegetatif Intensif</option>
+                        <option value="transition">Transisi Generatif</option>
+                        <option value="generative">Generatif</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="temperature"><i class="fas fa-thermometer-half"></i> Suhu Saat Ini (°C)</label>
+                    <input type="number" id="temperature" value="34" min="20" max="45">
+                </div>
+                
+                <div class="input-group">
+                    <label for="water"><i class="fas fa-tint"></i> Volume Air (Liter)</label>
+                    <input type="number" id="water" value="100" min="1" max="1000">
+                </div>
+                
+                <div class="input-group">
+                    <label for="ec"><i class="fas fa-flask"></i> Target EC (mS/cm)</label>
+                    <input type="number" id="ec" step="0.1" value="0.8" min="0.1" max="2.5">
+                </div>
+                
+                <button id="calculate-btn"><i class="fas fa-calculator"></i> Hitung Rekomendasi Pupuk</button>
+                
+                <div class="temp-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <strong>Perhatian!</strong> Suhu di atas 32°C membutuhkan penyesuaian nutrisi. 
+                        Setiap kenaikan 1°C di atas 32°C, turunkan EC tambahan 0.1 mS/cm.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-card">
+                <h2 class="result-title"><i class="fas fa-clipboard-list"></i> Hasil Perhitungan</h2>
+                <div class="result-content">
+                    <div class="result-item">
+                        <span>Fase Pertumbuhan:</span>
+                        <span class="result-value" id="result-phase">Vegetatif Intensif</span>
+                    </div>
+                    <div class="result-item">
+                        <span>EC yang Direkomendasikan:</span>
+                        <span class="result-value" id="result-ec">0.7 mS/cm</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Total PPM:</span>
+                        <span class="result-value" id="result-ppm">350 ppm</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Pupuk A (Kalsium Nitrat):</span>
+                        <span class="result-value" id="result-a">125 gram</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Pupuk B (Campuran PK):</span>
+                        <span class="result-value" id="result-b">180 gram</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Tambahan Kalium:</span>
+                        <span class="result-value" id="result-k">45 gram</span>
+                    </div>
+                </div>
+                
+                <div class="solution-highlight">
+                    <i class="fas fa-lightbulb"></i>
+                    <div>
+                        <strong>Protokol Aplikasi:</strong> 
+                        Beri larutan nutrisi penuh di pagi hari (06:00-07:00), 
+                        flushing dengan air bersih di siang hari (10:00-11:00), 
+                        dan larutan setengah konsentrasi di sore hari (15:00-16:00).
+                    </div>
+                </div>
+            </div>
+            
+            <div class="adjustment-card">
+                <h2 class="adjustment-title"><i class="fas fa-adjust"></i> Penyesuaian Nutrisi Berbasis Suhu</h2>
+                <p>Di iklim khatulistiwa, suhu tinggi menyebabkan masalah unik pada nutrisi tanaman. Gunakan panduan berikut untuk penyesuaian:</p>
+                
+                <table class="phase-table">
+                    <thead>
+                        <tr>
+                            <th>Fase Pertumbuhan</th>
+                            <th>EC Target (mS/cm)</th>
+                            <th>Total PPM</th>
+                            <th>Penyesuaian</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="phase-indicator veg"></span> Awal Vegetatif</td>
+                            <td>0.4-0.5</td>
+                            <td>200-250</td>
+                            <td>▼ 60% dari standar</td>
+                        </tr>
+                        <tr>
+                            <td><span class="phase-indicator veg"></span> Vegetatif Intensif</td>
+                            <td>0.6-0.8</td>
+                            <td>300-400</td>
+                            <td>▼ 50% dari standar</td>
+                        </tr>
+                        <tr>
+                            <td><span class="phase-indicator transition"></span> Transisi Generatif</td>
+                            <td>0.8-1.0</td>
+                            <td>400-500</td>
+                            <td>▼ 55% dari standar</td>
+                        </tr>
+                        <tr>
+                            <td><span class="phase-indicator gen"></span> Generatif</td>
+                            <td>1.0-1.2</td>
+                            <td>500-600</td>
+                            <td>▼ 65% dari standar</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p><strong>Formula Penyesuaian:</strong> Setiap kenaikan 1°C di atas 32°C, turunkan EC tambahan 0.1 mS/cm</p>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h2 class="info-title"><i class="fas fa-info-circle"></i> Panduan Nutrisi untuk Suhu Tinggi</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-sun"></i> Formula Vegetatif</h3>
+                    <ul>
+                        <li>Nitrogen (N): 25 ppm</li>
+                        <li>Kalium (K): 80 ppm</li>
+                        <li>Kalsium (Ca): 60 ppm</li>
+                        <li>Magnesium (Mg): 30 ppm</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3><i class="fas fa-seedling"></i> Formula Generatif</h3>
+                    <ul>
+                        <li>Nitrogen (N): 20 ppm</li>
+                        <li>Kalium (K): 120 ppm</li>
+                        <li>Fosfor (P): 25 ppm</li>
+                    </ul>
+                    <p><strong>Peringatan:</strong> Hindari urea/NH₄⁺ >5ppm karena risiko toksisitas amonia di suhu tinggi</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><i class="fas fa-fire"></i> Mitigasi Stres Panas</h3>
+                    <ul>
+                        <li>Gunakan naungan 40-50% (11:00-15:00)</li>
+                        <li>Media tanam: Cocopeat 50%, Perlit 30%, Biochar 15%</li>
+                        <li>Lapisi pot dengan aluminium foil</li>
+                        <li>Siram hanya saat suhu <30°C</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Dikembangkan Oleh Muhammad Kahfi Al Fauzan dengan ❤️ untuk petani Indonesia</p>
+            <p>© 2023 Rekomendasi Pertanian Tropis | MIT License</p>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculateBtn = document.getElementById('calculate-btn');
+            
+            calculateBtn.addEventListener('click', function() {
+                calculateRecommendation();
+            });
+            
+            // Set initial calculation
+            calculateRecommendation();
+            
+            function calculateRecommendation() {
+                // Get input values
+                const phase = document.getElementById('phase').value;
+                const temperature = parseFloat(document.getElementById('temperature').value);
+                const water = parseFloat(document.getElementById('water').value);
+                const ec = parseFloat(document.getElementById('ec').value);
+                
+                // Base values based on phase
+                let baseEC, basePPM, fertilizerA, fertilizerB, additionalK;
+                let phaseName = '';
+                
+                switch(phase) {
+                    case 'early_veg':
+                        baseEC = 0.45;
+                        basePPM = 225;
+                        fertilizerA = 0.4;
+                        fertilizerB = 0.5;
+                        additionalK = 0.1;
+                        phaseName = 'Awal Vegetatif';
+                        break;
+                    case 'intensive_veg':
+                        baseEC = 0.7;
+                        basePPM = 350;
+                        fertilizerA = 0.6;
+                        fertilizerB = 0.7;
+                        additionalK = 0.15;
+                        phaseName = 'Vegetatif Intensif';
+                        break;
+                    case 'transition':
+                        baseEC = 0.9;
+                        basePPM = 450;
+                        fertilizerA = 0.7;
+                        fertilizerB = 0.8;
+                        additionalK = 0.2;
+                        phaseName = 'Transisi Generatif';
+                        break;
+                    case 'generative':
+                        baseEC = 1.1;
+                        basePPM = 550;
+                        fertilizerA = 0.8;
+                        fertilizerB = 1.0;
+                        additionalK = 0.25;
+                        phaseName = 'Generatif';
+                        break;
+                    default:
+                        baseEC = 0.7;
+                        basePPM = 350;
+                        fertilizerA = 0.6;
+                        fertilizerB = 0.7;
+                        additionalK = 0.15;
+                        phaseName = 'Vegetatif Intensif';
+                }
+                
+                // Temperature adjustment
+                let tempAdjustment = 0;
+                if (temperature > 32) {
+                    tempAdjustment = (temperature - 32) * 0.1;
+                }
+                
+                // Apply adjustments
+                const adjustedEC = Math.max(baseEC - tempAdjustment, 0.2);
+                const adjustedPPM = Math.max(basePPM - (tempAdjustment * 500), 100);
+                
+                // Calculate fertilizer amounts
+                const resultA = Math.round(fertilizerA * water * (adjustedEC / baseEC));
+                const resultB = Math.round(fertilizerB * water * (adjustedEC / baseEC));
+                const resultK = Math.round(additionalK * water * (adjustedEC / baseEC));
+                
+                // Update result display
+                document.getElementById('result-phase').textContent = phaseName;
+                document.getElementById('result-ec').textContent = adjustedEC.toFixed(1) + ' mS/cm';
+                document.getElementById('result-ppm').textContent = adjustedPPM + ' ppm';
+                document.getElementById('result-a').textContent = resultA + ' gram';
+                document.getElementById('result-b').textContent = resultB + ' gram';
+                document.getElementById('result-k').textContent = resultK + ' gram';
+            }
+        });
+    </script>
+</body>
+</html>
