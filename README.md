@@ -2,7 +2,11 @@
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/username/repo/blob/main/LICENSE)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
-
+Secangkir Kopi:
+Verus : RPMu8QpUxvevPuTX2baVeVmt9PvYfWjURN
+Bitcoin : 1F5i3twCN6rMKu6KZRbNYySgP8TwzKrWgh
+Etherium : 0x1F491f5d86b78865cD20379FC47FaA04E4f5ceB3
+Litecoin : LZJfK7F2Sm6QahnUjZafpzWSbLqE7mp2NK
 Sistem rekomendasi nutrisi tanaman yang dirancang khusus untuk kondisi iklim khatulistiwa dengan suhu tinggi (>30°C). Proyek ini membantu petani menghindari overdosis nutrisi akibat penguapan tinggi dan stres panas.
 
 ![Preview Aplikasi](screenshot.png)
