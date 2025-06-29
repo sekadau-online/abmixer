@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kalkulator Mikro Nutrien Vitaflex Meroke</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f9f0; }
+    h1 { color: #2c6e3c; }
+    input, button { padding: 10px; margin: 5px; font-size: 16px; }
+    table { border-collapse: collapse; margin-top: 20px; width: 100%; background: #fff; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+    th { background: #2c6e3c; color: #fff; }
+    .note { background: #e6ffe6; padding: 10px; border-left: 5px solid #2c6e3c; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <h1>Kalkulator Mikro Nutrien Vitaflex Meroke</h1>
+
+  <div>
+    <label>Import Data Hasil AB Mix (JSON):</label>
+    <input type="file" id="importHasil" accept=".json" />
+  </div>
+
+  <div class="note" id="infoHasil"></div>
+
+  <div>
+    <label>Berat Vitaflex (gram):</label>
+    <input type="number" id="gramVitaflex" value="100" min="0" step="1" />
+    <button onclick="hitungMikro()">Hitung Mikro</button>
+  </div>
+
+  <div id="hasil"></div>
+
+  <script>
+    let importedData = null;
+
+    // Data Vitaflex (sesuai label Meroke)
+    const vitaflex = {
+      fe: 6,  // Fe 6% w/w
+      mn: 3,  // Mn 3%
+      zn: 3,
+      cu: 0.5,
+      b: 1,
+      mo: 0.1
+    };
+
+    document.getElementById("importHasil").addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          importedData = JSON.parse(e.target.result);
+          const v = importedData.volumeAir || '?';
+          const t = importedData.hasil ? importedData.hasil.totalGram : '?';
+          document.getElementById("infoHasil").innerHTML = `
+            <strong>Volume Air:</strong> ${v} Liter<br/>
+            <strong>Total Pupuk Makro:</strong> ${t} gram
+          `;
+        } catch (err) {
+          alert("Gagal membaca JSON: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    function hitungMikro() {
+      if (!importedData) {
+        alert("Silakan import data AB Mix dulu!");
+        return;
+      }
+
+      const gramVitaflex = parseFloat(document.getElementById("gramVitaflex").value) || 0;
+      const volume = importedData.volumeAir || 1;
+
+      const ppm = (persen) => persen * gramVitaflex * 10 / volume;
+
+      const Fe = ppm(vitaflex.fe);
+      const Mn = ppm(vitaflex.mn);
+      const Zn = ppm(vitaflex.zn);
+      const Cu = ppm(vitaflex.cu);
+      const B = ppm(vitaflex.b);
+      const Mo = ppm(vitaflex.mo);
+
+      document.getElementById("hasil").innerHTML = `
+        <h2>Hasil Mikro Nutrien (ppm)</h2>
+        <table>
+          <tr><th>Unsur</th><th>ppm</th></tr>
+          <tr><td>Fe</td><td>${Fe.toFixed(2)}</td></tr>
+          <tr><td>Mn</td><td>${Mn.toFixed(2)}</td></tr>
+          <tr><td>Zn</td><td>${Zn.toFixed(2)}</td></tr>
+          <tr><td>Cu</td><td>${Cu.toFixed(2)}</td></tr>
+          <tr><td>B</td><td>${B.toFixed(2)}</td></tr>
+          <tr><td>Mo</td><td>${Mo.toFixed(2)}</td></tr>
+        </table>
+        <p class="note">Perhitungan ini otomatis menyesuaikan Volume Air master: <strong>${volume} Liter</strong>.</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
