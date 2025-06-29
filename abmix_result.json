@@ -1,0 +1,48 @@
+{
+  "volumeAir": 1000,
+  "faseTanaman": "semai",
+  "preset": "semai 1000 liter",
+  "bahan": [
+    {
+      "nama": "Kalium Klorida (KCl)",
+      "gram": 28
+    },
+    {
+      "nama": "Kalium Sulfat (K₂SO₄)",
+      "gram": 20
+    },
+    {
+      "nama": "Mono Kalium Fosfat (MKP)",
+      "gram": 0
+    },
+    {
+      "nama": "Magnesium Sulfat (MgSO₄)",
+      "gram": 40
+    },
+    {
+      "nama": "Mono Amonium Fosfat (MAP)",
+      "gram": 60
+    },
+    {
+      "nama": "Kalsium Nitrat (Ca(NO₃)₂)",
+      "gram": 400
+    },
+    {
+      "nama": "Kalium Nitrat (KNO₃)",
+      "gram": 70
+    }
+  ],
+  "hasil": {
+    "totalGram": 618,
+    "nutrients": {
+      "n": 78.3,
+      "p": 36.6,
+      "k": 59.400000000000006,
+      "s": 8.8,
+      "mg": 6.4,
+      "ca": 104
+    },
+    "ec": 0.4017,
+    "tds": 257.088
+  }
+}
